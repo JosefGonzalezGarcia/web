@@ -1,0 +1,74 @@
+﻿@model TelerikExample.Models.FormularioBasicoModel
+
+<br />
+
+<script>
+    $("#notification").kendoNotification({
+        position: {
+            top: 30,
+            right: 30
+        },
+        stacking: "down",
+        autoHideAfter: 3000
+    });
+
+    function guardaFormulario() {
+        $.each($('#formularioBasico span.field-validation-valid.text-danger'), function (idx, obj) { $(obj).html('') });
+
+        $("#formularioBasico").ajaxSubmit({
+            url: './Formulario/FormularioBasico',
+            type: 'post',
+            success: function () {
+                document.getElementById("formularioBasico").reset();         
+
+                $("#notification").data("kendoNotification").info().show("Formulario guardado");
+            },
+            error: function (response) {
+                if (response.status == 400) {
+                    if (response.responseJSON.errors != null) {
+                        $.each(response.responseJSON.errors, function (idx, obj) {
+                            mostrarError(obj, '#formularioBasico');
+                        });
+                    }
+                }
+
+                $("#notification").data("kendoNotification").error().show("Formulario no guardado");
+            }
+        });
+
+        
+    }
+
+    function mostrarError(obj, form) {
+        $(form + ' span[data-valmsg-for="' + obj.Key + '"]').html(obj.Value[0]);
+    }
+</script>
+
+<span id="notification"></span>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formularioBasico" }))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.nombre)
+                @Html.Kendo().TextBoxFor(model => model.nombre).HtmlAttributes(new { style = "width: 100%;" })
+                @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                @Html.ValidationMessage("InvalidSession", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.email)
+                @Html.Kendo().TextBoxFor(model => model.email).HtmlAttributes(new { style = "width: 100%;" })
+                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger", style = "width: 100%;" })
+                @Html.ValidationMessage("InvalidSession", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+                @Html.Kendo().Button().Name("Limpiar").Content("Limpiar formulario").HtmlAttributes(new { @class = "k-button", type = "reset" })
+                @Html.Kendo().Button().Name("Guardar").Content("Guardar").HtmlAttributes(new { @class = "k-button k-primary", type = "button", onclick= "guardaFormulario()" })
+            </div>
+        </div>
+    </div>
+}

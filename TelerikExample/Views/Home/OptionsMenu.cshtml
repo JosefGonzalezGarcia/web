@@ -1,0 +1,16 @@
+﻿<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+    <!-- /.navbar-header -->
+    <p class="navbar-text navbar-right" style="padding-right:150px;">JP Application</p>
+
+    <!-- /.navbar-top-links -->
+    <div class="sidebar" role="navigation">
+        
+            @(
+                Html.Kendo().PanelBar()
+                    .Name("panelBarHeader")
+                    .BindTo((IEnumerable<PanelBarItemModel>)ViewBag.inlineDefault)
+            )
+        
+    </div>
+</nav>

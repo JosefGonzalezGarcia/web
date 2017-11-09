@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewBag.Title - JP MVC Application</title>
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/greenStyle.css")" rel="stylesheet" type="text/css" />
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+
+    <link href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
+    @*<script src="https://kendo.cdn.telerik.com/2017.3.1026/js/jquery.min.js"></script>*@
+    <script src="https://kendo.cdn.telerik.com/2017.3.1026/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.3.1026/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.3.1026/js/kendo.aspnetmvc.min.js"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        @RenderSection("panelHeader", false)
+
+        @RenderBody()
+
+    </div>
+</body>
+</html>

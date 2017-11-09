@@ -1,0 +1,26 @@
+﻿<br/>
+
+@(
+    Html.Kendo().Grid<TelerikExample.Models.GridModel>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.name).Title("Nombre");
+            columns.Bound(c => c.alias).Title("Alias");
+            columns.Bound(c => c.email).Title("Email del usuairo");
+            columns.Bound(c => c.dir).Width(150).Title("Direccion de usuario");
+        })
+        .HtmlAttributes(new { style = "height: 560px;" })
+        .Scrollable()
+        .Sortable()
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(false)
+            .ButtonCount(5))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("GridPrincipalList", "Grid"))
+            .PageSize(20)
+        )
+)
+

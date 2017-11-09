@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@section panelHeader{
+    @Html.Action("OptionsMenu", "Home")
+}
+
+<script>
+    function gridPrincipal() {
+        $('#page-wrapper').load('@Url.Action("GridPrincipal", "Grid")');
+    }
+    function formularioBasico() {
+        $('#page-wrapper').load('@Url.Action("FormularioBasico", "Formulario")');
+    }
+</script>
+
+<div id="page-wrapper">
+    
+</div>
+
