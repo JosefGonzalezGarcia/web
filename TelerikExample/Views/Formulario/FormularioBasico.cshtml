@@ -3,6 +3,8 @@
 <br />
 
 <script>
+    kendo.culture("es-ES");
+
     $("#notification").kendoNotification({
         position: {
             top: 30,
@@ -19,7 +21,7 @@
             url: './Formulario/FormularioBasico',
             type: 'post',
             success: function () {
-                document.getElementById("formularioBasico").reset();         
+                document.getElementById("formularioBasico").reset();
 
                 $("#notification").data("kendoNotification").info().show("Formulario guardado");
             },
@@ -36,7 +38,7 @@
             }
         });
 
-        
+
     }
 
     function mostrarError(obj, form) {
@@ -66,8 +68,32 @@
         </div>
         <div class="form-group">
             <div class="col-md-6">
+                @Html.LabelFor(model => model.precioMaximo)
+                @Html.Kendo().NumericTextBoxFor(model => model.precioMaximo).Format("c").Min(0).HtmlAttributes(new { style = "width: 95%;" })
+                @Html.ValidationMessageFor(model => model.precioMaximo, "", new { @class = "text-danger" })
+                @Html.ValidationMessage("InvalidSession", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.fecha)
+                @Html.Kendo().DateTimePickerFor(model => model.fecha).HtmlAttributes(new { style = "width: 88%;" }).Value(DateTime.Now)
+                @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                @Html.ValidationMessage("InvalidSession", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.listNombresSelected)
+                @Html.Kendo().MultiSelectFor(model => model.listNombresSelected).BindTo(Model.listNombres).HtmlAttributes(new { style = "width: 100%;" })
+                @Html.ValidationMessageFor(model => model.listNombresSelected, "", new { @class = "text-danger" })
+                @Html.ValidationMessage("InvalidSession", new { @class = "text-danger" })
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-6">
                 @Html.Kendo().Button().Name("Limpiar").Content("Limpiar formulario").HtmlAttributes(new { @class = "k-button", type = "reset" })
-                @Html.Kendo().Button().Name("Guardar").Content("Guardar").HtmlAttributes(new { @class = "k-button k-primary", type = "button", onclick= "guardaFormulario()" })
+                @Html.Kendo().Button().Name("Guardar").Content("Guardar").HtmlAttributes(new { @class = "k-button k-primary", type = "button", onclick = "guardaFormulario()" })
             </div>
         </div>
     </div>
